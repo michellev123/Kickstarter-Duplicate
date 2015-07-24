@@ -24,4 +24,18 @@ post '/signup' do
   @donor.save
   erb :donors
   end
+
+
+get '/new_project' do
+  
+end 
+
+post '/new_project' do 
+  @project = Project.new({:genre => params[:genre], :title => params[:title], :goal => params[:goal], :image_file => params[:image_file], :description => params[:description], :location => params[:location], :duration => [:duration], :donor_id => params[:donor_id]})
+  @project.save
+  
+  erb :new_project
+  
+  
+  
 end 
