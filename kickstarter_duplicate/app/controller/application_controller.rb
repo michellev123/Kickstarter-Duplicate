@@ -11,7 +11,6 @@ class ApplicationController < Sinatra::Base
 end
 
 get '/' do
-  
   erb :index
 end 
 
@@ -22,20 +21,25 @@ end
 post '/signup' do
   @donor= Donor.new({:username => params[:username], :full_name => params[:full_name], :phone_number => params[:phone_number], :email => params[:email], :credit_card => params[:credit_card]})
   @donor.save
-  erb :donors
+  erb :new_project
   end
 
-
-get '/new_project' do
-  
-end 
 
 post '/new_project' do 
   @project = Project.new({:genre => params[:genre], :title => params[:title], :goal => params[:goal], :image_file => params[:image_file], :description => params[:description], :location => params[:location], :duration => [:duration], :donor_id => params[:donor_id]})
   @project.save
-  
-  erb :new_project
-  
-  
-  
+  @the_projects = Project.all
+  erb :results
+ 
+end 
+post '/results' do 
+  @project = Project.new({:genre => params[:genre], :title => params[:title], :goal => params[:goal], :image_file => params[:image_file], :description => params[:description], :location => params[:location], :duration => [:duration], :donor_id => params[:donor_id]})
+  @project.save
+  @the_projects = Project.all
+  erb :results
+ 
+end
+
+
+
 end 
