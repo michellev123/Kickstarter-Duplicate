@@ -22,10 +22,10 @@ get '/signup' do
 end
 
 post '/signup' do
-  @donor= Donor.new({:username => params[:username], :full_name => params[:full_name], :phone_number => params[:phone_number], :email => params[:email], :credit_card => params[:credit_card]})
+  @donor = Donor.new({:username => params[:username], :full_name => params[:full_name], :phone_number => params[:phone_number], :email => params[:email], :credit_card => params[:credit_card]})
   @donor.save
   session[:user_id] = @donor.id
-  redirect('/new_project')
+  redirect('/new_project') 
 end 
 
 get '/login' do 
@@ -41,6 +41,11 @@ post '/login' do
     erb :error
   end
 end
+
+  get "/logout" do
+    session[:user_id] = nil
+    redirect("/login")
+  end 
 
 get '/new_project' do 
   erb :new_project
